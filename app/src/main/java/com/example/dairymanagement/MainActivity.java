@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.annotation.NonNull;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     Button submitBut;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+
+    MenuItem sell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +127,24 @@ public class MainActivity extends AppCompatActivity {
                         rateField.getText().toString(),amountField.getText().toString());
             }
         });
+
+
+
+
+
+//        sell=findViewById(R.id.sell);
+//        sell.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                Intent intent =  Intent(menuItem.getActionView(), sell.class);
+//                startActivity(intent);
+//                return false;
+//            }
+//        });
+
+
+
+
     }
 
 
@@ -155,8 +176,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+
             return true;
         }
+
+//        if(item.getItemId()==R.id.sell){
+//            Intent intent =new  Intent(this, sell.class);
+//            startActivity(intent);
+//            return true;
+//        }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -4,12 +4,12 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:id="@+id/buy"
+        android:title="Buy" />
 
     <item
-        android:id="@+id/nav_settings"
-        android:title="Settings" />
+        android:id="@+id/sell"
+        android:title="Sell" />
 
     <item
         android:id="@+id/nav_logout"
