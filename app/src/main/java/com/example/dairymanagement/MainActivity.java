@@ -16,7 +16,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        NavHostFragment navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
 //        NavController navController = navHostFragment.getNavController();
-//        NavigationView navView = findViewById(R.id.nav_view);
+        NavigationView navView = findViewById(R.id.nav_view);
 //        NavigationUI.setupWithNavController(navView, navController);
 //        AppBarConfiguration appBarConfiguration =
 //                new AppBarConfiguration.Builder(navController.getGraph())
@@ -142,6 +144,19 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+
+        MenuItem logOutItem = navView.getMenu().findItem(R.id.nav_logout);
+        logOutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast toast=Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);
+                toast.setMargin(50,50);
+                toast.show();
+                Intent intent = new Intent(getApplicationContext(), sell.class);
+                startActivity(intent);
+                return true;
+            }
+        });
 
 
 
