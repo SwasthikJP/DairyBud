@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dairymanagement">
         <activity
+            android:name=".consumer"
+            android:exported="false" />
+        <activity
+            android:name=".producer"
+            android:exported="false" />
+        <activity
             android:name=".sell"
             android:exported="false" />
         <activity

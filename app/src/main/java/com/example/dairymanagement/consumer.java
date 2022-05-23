@@ -1,34 +1,32 @@
 package com.example.dairymanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import androidx.annotation.NonNull;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-
-public class MainActivity extends AppCompatActivity {
+public class consumer extends AppCompatActivity {
 
     TextInputEditText dateField, pidField, quantityField, rateField, amountField;
-   private int cDate,cMonth,cYear;
-   Spinner spinner;
+    private int cDate,cMonth,cYear;
+    Spinner spinner;
     Button submitBut;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -38,17 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-//        NavHostFragment navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-//        NavController navController = navHostFragment.getNavController();
-        NavigationView navView = findViewById(R.id.nav_view);
-//        NavigationUI.setupWithNavController(navView, navController);
-//        AppBarConfiguration appBarConfiguration =
-//                new AppBarConfiguration.Builder(navController.getGraph())
-//                        .setDrawerLayout(drawerLayout)
-//                        .build();
+        setContentView(R.layout.activity_consumer);
 
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
@@ -71,15 +59,15 @@ public class MainActivity extends AppCompatActivity {
         dateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            final Calendar cal = Calendar.getInstance();
-            cDate=cal.get(Calendar.DATE);
-            cMonth=cal.get(Calendar.MONTH);
-            cYear=cal.get(Calendar.YEAR);
+                final Calendar cal = Calendar.getInstance();
+                cDate=cal.get(Calendar.DATE);
+                cMonth=cal.get(Calendar.MONTH);
+                cYear=cal.get(Calendar.YEAR);
                 DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, android.R.style.Theme_DeviceDefault_Dialog,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                            dateField.setText(y+"-"+m+"-"+d);
+                                dateField.setText(y+"-"+m+"-"+d);
                             }
                         },cYear,cMonth,cDate );
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -113,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-       submitBut=findViewById(R.id.submit);
-       pidField=findViewById(R.id.pidField);
+        submitBut=findViewById(R.id.submit);
+        pidField=findViewById(R.id.pidField);
         quantityField=findViewById(R.id.quantityField);
-       rateField=findViewById(R.id.rateField);
+        rateField=findViewById(R.id.rateField);
         amountField=findViewById(R.id.amountField);
 
 
@@ -145,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-        MenuItem sellItem = navView.getMenu().findItem(R.id.sell);
-        sellItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem logOutItem = navView.getMenu().findItem(R.id.nav_logout);
+        logOutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Toast toast=Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);
@@ -163,28 +151,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   Boolean buttonPress(String date,String pid,String quantity,String milkType,String rate,String amount){
-         Log.d("t", "123");
-         if(date.length()==0){
-             dateField.requestFocus();
-             dateField.setError("Field cannot be empty");
-             return false;
-         }
-         else if( quantity.length()==0 || quantity.equals("0")){
-             quantityField.requestFocus();
-             quantityField.setError("Value has to be greater than 0");
-             return false;
-         }
-         else if(rate.length()==0 || rate.equals("0")){
-             rateField.requestFocus();
-             rateField.setError("Value has to be greater than 0");
-         }
-         else if(amount.length()==0 || amount.equals("0")){
-             amountField.requestFocus();
-             amountField.setError("Value has to be greater than 0");
-         }
+    Boolean buttonPress(String date,String pid,String quantity,String milkType,String rate,String amount){
+        Log.d("t", "123");
+        if(date.length()==0){
+            dateField.requestFocus();
+            dateField.setError("Field cannot be empty");
+            return false;
+        }
+        else if( quantity.length()==0 || quantity.equals("0")){
+            quantityField.requestFocus();
+            quantityField.setError("Value has to be greater than 0");
+            return false;
+        }
+        else if(rate.length()==0 || rate.equals("0")){
+            rateField.requestFocus();
+            rateField.setError("Value has to be greater than 0");
+        }
+        else if(amount.length()==0 || amount.equals("0")){
+            amountField.requestFocus();
+            amountField.setError("Value has to be greater than 0");
+        }
 
-         return true;
+        return true;
     }
 
 
@@ -195,6 +183,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+//        if(item.getItemId()==R.id.sell){
+//            Intent intent =new  Intent(this, sell.class);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -202,4 +195,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
 }
+

@@ -12,7 +12,11 @@
         android:title="Sell" />
 
     <item
-        android:id="@+id/nav_logout"
-        android:title="Logout" />
+        android:id="@+id/Producer"
+        android:title="Add producer" />
+
+    <item
+        android:id="@+id/Consumer"
+        android:title="Add consumer" />
 
 </menu>
