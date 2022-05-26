@@ -10,9 +10,7 @@
     tools:ignore="HardcodedText">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FAFAFF"
@@ -47,13 +45,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Date"
+                    android:text="Producer ID"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dateField"
+                    android:id="@+id/pidField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -72,19 +70,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Consumer ID"
+                    android:text="Name"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/pidField"
+                    android:id="@+id/nameField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
-                    android:hint="C100"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
                     android:padding="5dp"
@@ -99,19 +96,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Quantity"
+                    android:text="Address"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/quantityField"
+                    android:id="@+id/addressField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
-                    android:hint="0"
-                    android:inputType="numberDecimal"
+                    android:inputType="textMultiLine"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
                     android:padding="5dp"
@@ -126,66 +122,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Milk Type"
-                    android:textColor="#000000"
-                    android:textFontWeight="700"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:contentDescription="milk type"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"></Spinner>
-
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Rate"
+                    android:text="Contact"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/rateField"
+                    android:id="@+id/contactField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
-                    android:hint="0"
-                    android:inputType="numberDecimal"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
-
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Amount"
-                    android:textColor="#000000"
-                    android:textFontWeight="700"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/amountField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="#777AF3"
-                    android:hint="0"
-                    android:inputType="numberDecimal"
+                    android:inputType="phone"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
                     android:padding="5dp"
@@ -214,7 +162,7 @@
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Hello"
+                android:text="Add Producer"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 tools:ignore="TouchTargetSizeCheck"></Button>

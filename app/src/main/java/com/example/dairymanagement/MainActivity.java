@@ -5,23 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.annotation.NonNull;
-import android.app.DatePickerDialog;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
    Spinner spinner;
     Button submitBut;
     public DrawerLayout drawerLayout;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
+    ActionBarDrawerToggle actionBarDrawerToggle;
 
     MenuItem sell;
 
@@ -41,83 +35,43 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-//        NavHostFragment navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-//        NavController navController = navHostFragment.getNavController();
         NavigationView navView = findViewById(R.id.nav_view);
-//        NavigationUI.setupWithNavController(navView, navController);
-//        AppBarConfiguration appBarConfiguration =
-//                new AppBarConfiguration.Builder(navController.getGraph())
-//                        .setDrawerLayout(drawerLayout)
-//                        .build();
-
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
 
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        // to make the Navigation drawer icon always appear on the action bar
+        appdrawerListener aL=new appdrawerListener();
+       actionBarDrawerToggle= aL.adddrawerOpener(actionBarDrawerToggle,drawerLayout,this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
 
 
-        dateField=findViewById(R.id.dateField);
 
-        dateField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            final Calendar cal = Calendar.getInstance();
-            cDate=cal.get(Calendar.DATE);
-            cMonth=cal.get(Calendar.MONTH);
-            cYear=cal.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, android.R.style.Theme_DeviceDefault_Dialog,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                            dateField.setText(y+"-"+m+"-"+d);
-                            }
-                        },cYear,cMonth,cDate );
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
-                datePickerDialog.show();
-            }
-        });
+        dateField=findViewById(R.id.dateField);
+        datePicker dp=new datePicker();
+
+        dp.dateonClick(dateField,MainActivity.this);
+
+
 
 
 
         spinner=findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.milkType, R.layout.spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                dateField.setText(adapterView.getItemAtPosition(i).toString());
-            }
+ spinnerDropdown sD=new spinnerDropdown();
+ sD.spinnerListener(spinner,MainActivity.this);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
 
 
 
 
 
        submitBut=findViewById(R.id.submit);
-       pidField=findViewById(R.id.pidField);
+       pidField=findViewById(R.id.nameField);
         quantityField=findViewById(R.id.quantityField);
        rateField=findViewById(R.id.rateField);
-        amountField=findViewById(R.id.amountField);
+        amountField=findViewById(R.id.contactField);
 
 
 
@@ -134,29 +88,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        sell=findViewById(R.id.sell);
-//        sell.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem menuItem) {
-//                Intent intent =  Intent(menuItem.getActionView(), sell.class);
-//                startActivity(intent);
-//                return false;
-//            }
-//        });
 
 
-        MenuItem sellItem = navView.getMenu().findItem(R.id.sell);
-        sellItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast toast=Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);
-                toast.setMargin(50,50);
-                toast.show();
-                Intent intent = new Intent(getApplicationContext(), sell.class);
-                startActivity(intent);
-                return true;
-            }
-        });
+
+
+
+//
+AppDrawer ad=new AppDrawer();
+        ad.navitemClick(navView,this);
 
 
 
@@ -190,16 +129,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
 
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
 }

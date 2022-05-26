@@ -79,7 +79,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pidField"
+                android:id="@+id/nameField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -179,7 +179,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amountField"
+                android:id="@+id/contactField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -214,7 +214,7 @@
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Hello"
+            android:text="Buy"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             tools:ignore="TouchTargetSizeCheck"></Button>
