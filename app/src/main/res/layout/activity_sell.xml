@@ -78,20 +78,28 @@
                     android:textStyle="bold" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameField"
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/nameField"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    android:background="#777AF3"-->
+<!--                    android:hint="C100"-->
+<!--                    android:minWidth="48dp"-->
+<!--                    android:minHeight="48dp"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:textColor="#FFFFFF"-->
+<!--                    android:textColorHighlight="#FFFFFF"-->
+<!--                    android:textColorHint="#FFFFFF"-->
+<!--                    android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>-->
+                <Spinner
+                    android:id="@+id/spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:background="#777AF3"
-                    android:hint="C100"
+                    android:contentDescription="milk type"
                     android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
+                    android:minHeight="48dp"></Spinner>
 
 
                 <TextView

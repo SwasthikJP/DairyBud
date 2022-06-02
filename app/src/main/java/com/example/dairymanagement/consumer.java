@@ -11,15 +11,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class consumer extends AppCompatActivity {
 
-    TextInputEditText dateField, pidField, quantityField, rateField, amountField;
-    private int cDate,cMonth,cYear;
-    Spinner spinner;
+    TextInputEditText  cidField, nameField, addressField, contactField;
+
     Button submitBut;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -45,48 +53,82 @@ public class consumer extends AppCompatActivity {
 
 
 
-        dateField=findViewById(R.id.dateField);
-        datePicker dp=new datePicker();
-
-        dp.dateonClick(dateField,this);
-
-
-
-
-
-        spinner=findViewById(R.id.spinner);
-        spinnerDropdown sD=new spinnerDropdown();
-        sD.spinnerListener(spinner,this);
-
-
-
-
 
 
 
         submitBut=findViewById(R.id.submit);
-        pidField=findViewById(R.id.nameField);
-        quantityField=findViewById(R.id.quantityField);
-        rateField=findViewById(R.id.rateField);
-        amountField=findViewById(R.id.contactField);
+        cidField=findViewById(R.id.pidField);
+        nameField=findViewById(R.id.nameField);
+        addressField=findViewById(R.id.addressField);
+        contactField=findViewById(R.id.contactField);
 
 
 
         submitBut.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                buttonPress(dateField.getText().toString(),pidField.getText().toString(),
-                        quantityField.getText().toString(),spinner.getSelectedItem().toString(),
-                        rateField.getText().toString(),amountField.getText().toString());
+                if( buttonPress(cidField.getText().toString(),nameField.getText().toString(),
+                        addressField.getText().toString(),contactField.getText().toString())){
+//                    Toast toast;
+//                 toast= Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_SHORT);
+//                  toast.setMargin(50,50);
+//                  toast.show();
+
+
+                    FirebaseFirestore db=FirebaseFirestore.getInstance();
+
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("cid",cidField.getText().toString().toUpperCase());
+                    data.put("name",nameField.getText().toString());
+                    data.put("address",addressField.getText().toString());
+                    data.put("contact",contactField.getText().toString());
+                    data.put("created", FieldValue.serverTimestamp());
+
+
+                    db.collection("consumer")
+                            .whereEqualTo("cid",cidField.getText().toString().toUpperCase() )
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    if (task.getResult().getDocuments().size() ==1){
+                                        Toast toast= Toast.makeText(getApplicationContext(),cidField.getText().toString().toUpperCase() +" already exists",Toast.LENGTH_SHORT);
+                                        toast.setMargin(50,50);
+                                        toast.show();
+                                    }else{
+
+                                        db.collection("consumer")
+                                                .add(data)
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        Toast toast= Toast.makeText(getApplicationContext(),"Consumer is added",Toast.LENGTH_SHORT);
+                                                        toast.setMargin(50,50);
+                                                        toast.show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                        Toast toast= Toast.makeText(getApplicationContext(),"Error occured",Toast.LENGTH_SHORT);
+                                                        toast.setMargin(50,50);
+                                                        toast.show();
+                                                    }
+                                                });
+
+                                    }
+
+                                }
+                            });
+
+
+
+
+
+
+                }
             }
         });
-
-
-
-
-
-
-
 
 
 
@@ -99,25 +141,27 @@ public class consumer extends AppCompatActivity {
     }
 
 
-    Boolean buttonPress(String date,String pid,String quantity,String milkType,String rate,String amount){
+    Boolean buttonPress(String cid,String name,String address,String contact){
         Log.d("t", "123");
-        if(date.length()==0){
-            dateField.requestFocus();
-            dateField.setError("Field cannot be empty");
+        if(cid.length()==0){
+            cidField.requestFocus();
+            cidField.setError("Cid should not be empty");
             return false;
         }
-        else if( quantity.length()==0 || quantity.equals("0")){
-            quantityField.requestFocus();
-            quantityField.setError("Value has to be greater than 0");
+        else if( name.length()<=2 ){
+            nameField.requestFocus();
+            nameField.setError("Name should not be more than 2 characters");
             return false;
         }
-        else if(rate.length()==0 || rate.equals("0")){
-            rateField.requestFocus();
-            rateField.setError("Value has to be greater than 0");
+        else if(address.length()<=3 ){
+            addressField.requestFocus();
+            addressField.setError("Enter valid address");
+            return false;
         }
-        else if(amount.length()==0 || amount.equals("0")){
-            amountField.requestFocus();
-            amountField.setError("Value has to be greater than 0");
+        else if(contact.length()==0 || !contact.matches("[5-9][0-9]{9}")){
+            contactField.requestFocus();
+            contactField.setError("Enter valid mobile number");
+            return false;
         }
 
         return true;

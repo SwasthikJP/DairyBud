@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "299212324031",
+    "project_id": "dairymanagement-ec4a6",
+    "storage_bucket": "dairymanagement-ec4a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299212324031:android:43f94b22aed828d266da0a",
+        "android_client_info": {
+          "package_name": "com.example.dairymanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299212324031-ai3br93q9e6dvq8ri6qk4h88lusul1mm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwow7cNCrXJJJPS-3lZACKkcRd_oYIahY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299212324031-ai3br93q9e6dvq8ri6qk4h88lusul1mm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
