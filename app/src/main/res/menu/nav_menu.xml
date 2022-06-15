@@ -19,6 +19,10 @@
         android:id="@+id/Consumer"
         android:title="Add consumer" />
 
+    <item
+        android:id="@+id/allproducer"
+        android:title="All producer" />
+
 
 
 </menu>

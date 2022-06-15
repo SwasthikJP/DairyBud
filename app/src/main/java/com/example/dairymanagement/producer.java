@@ -58,6 +58,8 @@ public class producer extends AppCompatActivity {
         actionBarDrawerToggle= aL.adddrawerOpener(actionBarDrawerToggle,drawerLayout,this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        AppDrawer ad=new AppDrawer();
+        ad.navitemClick(navView,this);
 
 
 
@@ -143,8 +145,6 @@ public class producer extends AppCompatActivity {
 
 
 //
-        AppDrawer ad=new AppDrawer();
-        ad.navitemClick(navView,this);
 
 
 

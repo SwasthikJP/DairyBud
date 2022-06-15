@@ -54,6 +54,14 @@ public class AppDrawer {
                         context.startActivity(intent);
                         break;
 
+                    case R.id.allproducer:
+                        toast=Toast.makeText(context,"allproducer",Toast.LENGTH_SHORT);
+                        toast.setMargin(50,50);
+                        toast.show();
+                        intent = new Intent(context, getproducers.class);
+                        context.startActivity(intent);
+                        break;
+
                 }
                 return true;
             }
