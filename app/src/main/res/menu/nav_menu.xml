@@ -21,7 +21,19 @@
 
     <item
         android:id="@+id/allproducer"
-        android:title="All producer" />
+        android:title="All producers" />
+
+    <item
+        android:id="@+id/allconsumer"
+        android:title="All consumers" />
+
+    <item
+        android:id="@+id/alltransaction"
+        android:title="All transactions" />
+
+    <item
+        android:id="@+id/updatedepot"
+        android:title="Depot Information" />
 
 
 

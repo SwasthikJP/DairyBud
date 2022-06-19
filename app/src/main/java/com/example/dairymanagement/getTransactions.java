@@ -33,7 +33,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class getconsumers extends AppCompatActivity {
+public class getTransactions extends AppCompatActivity {
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -41,7 +41,7 @@ public class getconsumers extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_getconsumers);
+        setContentView(R.layout.activity_get_transactions);
 
         NavigationView navView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.my_drawer_layout);
@@ -62,11 +62,9 @@ public class getconsumers extends AppCompatActivity {
 
 
 
-
-
         FirebaseFirestore db=FirebaseFirestore.getInstance();
 
-        db.collection("consumer")
+        db.collection("transaction")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -74,62 +72,84 @@ public class getconsumers extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                TableRow row= new TableRow(getconsumers.this);
+                                TableRow row= new TableRow(getTransactions.this);
                                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT,100);
-                                TextView cid = new TextView(getconsumers.this);
-                                cid.setPadding(100,100,100,100);
-                                cid.setTypeface(Typeface.DEFAULT_BOLD);
-                                cid.setTextColor(Color.parseColor("#0F2851"));
-                                cid.setTextSize(16);
-                                TextView name = new TextView(getconsumers.this);
-                                name.setPadding(100,100,100,100);
-                                name.setTypeface(Typeface.DEFAULT_BOLD);
-                                name.setTextColor(Color.parseColor("#0F2851"));
-                                name.setTextSize(16);
-                                TextView address = new TextView(getconsumers.this);
-                                address.setPadding(100,100,100,100);
-                                address.setTypeface(Typeface.DEFAULT_BOLD);
-                                address.setTextColor(Color.parseColor("#0F2851"));
-                                address.setTextSize(16);
-                                TextView date = new TextView(getconsumers.this);
+
+                                TextView userId = new TextView(getTransactions.this);
+                                userId.setPadding(100,100,100,100);
+                                userId.setTypeface(Typeface.DEFAULT_BOLD);
+                                userId.setTextColor(Color.parseColor("#0F2851"));
+                                userId.setTextSize(16);
+//
+                                TextView milkType = new TextView(getTransactions.this);
+                                milkType.setPadding(100,100,100,100);
+                                milkType.setTypeface(Typeface.DEFAULT_BOLD);
+                                milkType.setTextColor(Color.parseColor("#0F2851"));
+                                milkType.setTextSize(16);
+//
+                                TextView quantity = new TextView(getTransactions.this);
+                                quantity.setPadding(100,100,100,100);
+                                quantity.setTypeface(Typeface.DEFAULT_BOLD);
+                                quantity.setTextColor(Color.parseColor("#0F2851"));
+                                quantity.setTextSize(16);
+
+                                TextView date = new TextView(getTransactions.this);
                                 date.setPadding(100,100,100,100);
                                 date.setTypeface(Typeface.DEFAULT_BOLD);
                                 date.setTextColor(Color.parseColor("#0F2851"));
                                 date.setTextSize(16);
-
-                                TextView contact = new TextView(getconsumers.this);
-                                contact.setPadding(100,100,100,100);
-                                contact.setTypeface(Typeface.DEFAULT_BOLD);
-                                contact.setTextColor(Color.parseColor("#0F2851"));
-                                contact.setTextSize(16);
 //
+                                TextView rate = new TextView(getTransactions.this);
+                                rate.setPadding(100,100,100,100);
+                                rate.setTypeface(Typeface.DEFAULT_BOLD);
+                                rate.setTextColor(Color.parseColor("#0F2851"));
+                                rate.setTextSize(16);
 
+                                TextView amount = new TextView(getTransactions.this);
+                                amount.setPadding(100,100,100,100);
+                                amount.setTypeface(Typeface.DEFAULT_BOLD);
+                                amount.setTextColor(Color.parseColor("#0F2851"));
+                                amount.setTextSize(16);
+//
+                                TextView type = new TextView(getTransactions.this);
+                                type.setPadding(100,100,100,100);
+                                type.setTypeface(Typeface.DEFAULT_BOLD);
+                                type.setTextColor(Color.parseColor("#0F2851"));
+                                type.setTextSize(16);
 
 //
 
                                 row.setLayoutParams(lp);
-
-                                cid.setText(document.getData().get("cid").toString());
-                                row.addView(cid);
-
-                                name.setText(document.getData().get("name").toString());
-                                row.addView(name);
-
-                                address.setText(document.getData().get("address").toString());
-                                row.addView(address);
-
+//
+                                userId.setText(document.getData().get("userID").toString());
+                                row.addView(userId);
+//
+                                type.setText(document.getData().get("type").toString());
+                                  row.addView(type);
+//
                                 Timestamp timestamp=(Timestamp) document.getData().get("created");
                                 DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy");
                                 Date ddate=timestamp.toDate();
                                 date.setText(dateFormat.format(ddate));
                                 row.addView(date);
+//
+                                milkType.setText(document.getData().get("milktype").toString());
+                                row.addView(milkType);
 
-                                contact.setText(document.getData().get("contact").toString());
-                                row.addView(contact);
+                                quantity.setText(document.getData().get("quantity").toString());
+                                row.addView(quantity);
 
-                                Button update=new Button(getconsumers.this);
 
-                                Button delete=new Button(getconsumers.this);
+
+                                rate.setText(document.getData().get("rate").toString());
+                                row.addView(rate);
+
+                                amount.setText(document.getData().get("amount").toString());
+                                row.addView(amount);
+
+                                Button update=new Button(getTransactions.this);
+
+                                Button delete=new Button(getTransactions.this);
 
                                 update.setText("Update");
                                 delete.setText("Delete");
@@ -141,10 +161,10 @@ public class getconsumers extends AppCompatActivity {
 
 
 
-                                        Intent intent = new Intent(getconsumers.this, updateConsumer.class);
+                                        Intent intent = new Intent(getTransactions.this, updateTransaction.class);
                                         intent.putExtra("docID",document.getId());
 
-                                        getconsumers.this.startActivity(intent);
+                                        getTransactions.this.startActivity(intent);
                                     }
                                 });
 
@@ -160,7 +180,7 @@ public class getconsumers extends AppCompatActivity {
                             }
                         } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
-                            Toast toast= Toast.makeText(getconsumers.this,"errorrrr",Toast.LENGTH_SHORT);
+                            Toast toast= Toast.makeText(getTransactions.this,"errorrrr",Toast.LENGTH_SHORT);
                             toast.setMargin(50,50);
                             toast.show();
                         }
@@ -207,7 +227,7 @@ public class getconsumers extends AppCompatActivity {
                                         int which) {
 
 
-                        db.collection("consumer").document(document.getId())
+                        db.collection("transaction").document(document.getId())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

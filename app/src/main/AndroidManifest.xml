@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dairymanagement">
         <activity
+            android:name=".updateDepot"
+            android:exported="false" />
+        <activity
+            android:name=".updateTransaction"
+            android:exported="false" />
+        <activity
+            android:name=".getTransactions"
+            android:exported="false" />
+        <activity
+            android:name=".updateConsumer"
+            android:exported="false" />
+        <activity
             android:name=".getconsumers"
             android:exported="false" />
         <activity

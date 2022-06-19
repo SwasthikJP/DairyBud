@@ -62,6 +62,30 @@ public class AppDrawer {
                         context.startActivity(intent);
                         break;
 
+                    case R.id.allconsumer:
+                        toast=Toast.makeText(context,"allconsumer",Toast.LENGTH_SHORT);
+                        toast.setMargin(50,50);
+                        toast.show();
+                        intent = new Intent(context, getconsumers.class);
+                        context.startActivity(intent);
+                        break;
+
+                    case R.id.alltransaction:
+                        toast=Toast.makeText(context,"alltransaction",Toast.LENGTH_SHORT);
+                        toast.setMargin(50,50);
+                        toast.show();
+                        intent = new Intent(context, getTransactions.class);
+                        context.startActivity(intent);
+                        break;
+
+                    case R.id.updatedepot:
+                        toast=Toast.makeText(context,"updateDepot",Toast.LENGTH_SHORT);
+                        toast.setMargin(50,50);
+                        toast.show();
+                        intent = new Intent(context, updateDepot.class);
+                        context.startActivity(intent);
+                        break;
+
                 }
                 return true;
             }

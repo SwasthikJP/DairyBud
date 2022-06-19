@@ -5,17 +5,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,32 +18,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.google.firebase.FirebaseError;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-
-import java.lang.reflect.Field;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 
+public class updateConsumer extends AppCompatActivity {
 
-
-public class updateProducer extends AppCompatActivity {
-
-
-    TextInputEditText  pidField, nameField, addressField, contactField;
+    TextInputEditText cidField, nameField, addressField, contactField;
 
     Button submitBut;
     public DrawerLayout drawerLayout;
@@ -60,8 +37,7 @@ public class updateProducer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_producer);
-
+        setContentView(R.layout.activity_update_consumer);
 
         NavigationView navView = findViewById(R.id.nav_view);
 
@@ -76,12 +52,12 @@ public class updateProducer extends AppCompatActivity {
 
 
         submitBut = findViewById(R.id.submit);
-        pidField = findViewById(R.id.pidField);
+        cidField = findViewById(R.id.cidField);
         nameField = findViewById(R.id.nameField);
         addressField = findViewById(R.id.addressField);
         contactField = findViewById(R.id.contactField);
 
-        pidField.setFocusable(false);
+        cidField.setFocusable(false);
 
         String docID = getIntent().getStringExtra("docID");
 
@@ -91,7 +67,7 @@ public class updateProducer extends AppCompatActivity {
         submitBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (buttonPress(pidField.getText().toString(), nameField.getText().toString(),
+                if (buttonPress(cidField.getText().toString(), nameField.getText().toString(),
                         addressField.getText().toString(), contactField.getText().toString())) {
 //                    Toast toast;
 //                 toast= Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_SHORT);
@@ -102,19 +78,19 @@ public class updateProducer extends AppCompatActivity {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                     Map<String, Object> data = new HashMap<>();
-                    data.put("pid", pidField.getText().toString().toUpperCase());
+                    data.put("cid", cidField.getText().toString().toUpperCase());
                     data.put("name", nameField.getText().toString());
                     data.put("address", addressField.getText().toString());
                     data.put("contact", contactField.getText().toString());
 
 
-                    db.collection("producer")
+                    db.collection("consumer")
                             .document(docID).update(data)
 
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast toast = Toast.makeText(getApplicationContext(), pidField.getText().toString().toUpperCase() + " is updated", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(getApplicationContext(), cidField.getText().toString().toUpperCase() + " is updated", Toast.LENGTH_SHORT);
                                     toast.setMargin(50, 50);
                                     toast.show();
                                 }
@@ -141,55 +117,55 @@ public class updateProducer extends AppCompatActivity {
 
     }
 
-      public  void getData(String docID){
-            FirebaseFirestore db=FirebaseFirestore.getInstance();
+    public  void getData(String docID){
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
 
-            db.collection("producer").document(docID)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
+        db.collection("consumer").document(docID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
 
-                                DocumentSnapshot document= task.getResult();
-                                if (document.exists()) {
-                                    pidField=findViewById(R.id.pidField);
-                                    nameField=findViewById(R.id.nameField);
-                                    addressField=findViewById(R.id.addressField);
-                                    contactField=findViewById(R.id.contactField);
+                            DocumentSnapshot document= task.getResult();
+                            if (document.exists()) {
+                                cidField=findViewById(R.id.cidField);
+                                nameField=findViewById(R.id.nameField);
+                                addressField=findViewById(R.id.addressField);
+                                contactField=findViewById(R.id.contactField);
 
-                                    pidField.setText(document.getData().get("pid").toString());
-                                    nameField.setText(document.getData().get("name").toString());
-                                    addressField.setText(document.getData().get("address").toString());
-                                    contactField.setText(document.getData().get("contact").toString());
+                                cidField.setText(document.getData().get("cid").toString());
+                                nameField.setText(document.getData().get("name").toString());
+                                addressField.setText(document.getData().get("address").toString());
+                                contactField.setText(document.getData().get("contact").toString());
 
 
 
-                                } else {
-                                    Toast toast= Toast.makeText(updateProducer.this,"no such document",Toast.LENGTH_SHORT);
-                                    toast.setMargin(50,50);
-                                    toast.show();
-                                }
                             } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-                                Toast toast= Toast.makeText(updateProducer.this,"errorrrr",Toast.LENGTH_SHORT);
+                                Toast toast= Toast.makeText(updateConsumer.this,"no such document",Toast.LENGTH_SHORT);
                                 toast.setMargin(50,50);
                                 toast.show();
                             }
+                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast toast= Toast.makeText(updateConsumer.this,"errorrrr",Toast.LENGTH_SHORT);
+                            toast.setMargin(50,50);
+                            toast.show();
                         }
-                    });
-        }
+                    }
+                });
+    }
 
 
 
 
 
 
-    Boolean buttonPress(String pid,String name,String address,String contact){
+    Boolean buttonPress(String cid,String name,String address,String contact){
         Log.d("t", "123");
-        if(pid.length()==0){
-            pidField.requestFocus();
-            pidField.setError("Pid should not be empty");
+        if(cid.length()==0){
+            cidField.requestFocus();
+            cidField.setError("Cid should not be empty");
             return false;
         }
         else if( name.length()<=2 ){

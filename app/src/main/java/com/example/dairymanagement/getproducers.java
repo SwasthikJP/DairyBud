@@ -100,6 +100,7 @@ public class getproducers extends AppCompatActivity {
                                     address.setTypeface(Typeface.DEFAULT_BOLD);
                                     address.setTextColor(Color.parseColor("#0F2851"));
                                     address.setTextSize(16);
+
                                     TextView date = new TextView(getproducers.this);
                                     date.setPadding(100,100,100,100);
                                     date.setTypeface(Typeface.DEFAULT_BOLD);
