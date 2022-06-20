@@ -25,6 +25,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,6 +34,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class getTransactions extends AppCompatActivity {
 
@@ -168,7 +172,7 @@ public class getTransactions extends AppCompatActivity {
                                     }
                                 });
 
-                                delete.setOnClickListener(fun(db,document,row,tableLayout));
+                                delete.setOnClickListener(fun(db,document,row,tableLayout,milkType.getText().toString(),quantity.getText().toString(),type.getText().toString()));
 
                                 row.addView(update);
                                 row.addView(delete);
@@ -205,19 +209,19 @@ public class getTransactions extends AppCompatActivity {
 
 
     View.OnClickListener fun(FirebaseFirestore db, QueryDocumentSnapshot document, TableRow row,
-                             TableLayout tableLayout){
+                             TableLayout tableLayout,String milkType,String quantity,String type){
 
         return new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                alertDialog(db,document,row,tableLayout);
+                alertDialog(db,document,row,tableLayout,milkType,quantity,type);
             }
         };
 
     }
 
-    void alertDialog(FirebaseFirestore db, QueryDocumentSnapshot document,TableRow row,
-                     TableLayout tableLayout) {
+    void alertDialog(FirebaseFirestore db, QueryDocumentSnapshot document2,TableRow row,
+                     TableLayout tableLayout,String milkType,String quantity,String type) {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setMessage("Are you sure?");
 //        dialog.setTitle("Dialog Box");
@@ -225,27 +229,118 @@ public class getTransactions extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
+///////
 
 
-                        db.collection("transaction").document(document.getId())
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        DocumentReference documentReference = db.collection("users").document("a2NvkEuPdMi7K0g6uPcI");
+
+                        documentReference.get()
+                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
                                     @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
-                                        toast.setMargin(50, 50);
-                                        toast.show();
-                                        tableLayout.removeView(row);
+
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+
+                                                if (milkType.equals("Cow")) {
+                                                    float maxcow = Float.parseFloat(document.getData().get("maxcow").toString());
+                                                    float curcow = Float.parseFloat(document.getData().get("curcow").toString());
+                                                    float temp = Float.parseFloat(quantity);
+                                                    float temp2;
+                                                    if(type.equals("buy")){
+                                                        temp2=curcow-temp;
+                                                    }else{
+                                                        temp2=curcow+temp;
+                                                    }
+                                                    if (maxcow > (temp2)) {
+                                                        curcow =temp2;
+                                                        Map<String, Object> tempdata = new HashMap<>();
+                                                        tempdata.put("curcow", String.valueOf(curcow));
+
+                                                        documentReference.update(tempdata)
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
+                                                                        toast.setMargin(50, 50);
+                                                                        toast.show();
+                                                                        deleteDoc(db,document2, row,tableLayout);
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
+                                                                        toast.setMargin(50, 50);
+                                                                        toast.show();
+                                                                    }
+                                                                });
+                                                    } else {
+
+
+//                                                  throw new ArithmeticException("error");
+                                                    }
+                                                } else {
+                                                    float maxbuffalo = Float.parseFloat(document.getData().get("maxbuffalo").toString());
+                                                    float curbuffalo = Float.parseFloat(document.getData().get("curbuffalo").toString());
+                                                    float temp = Float.parseFloat(quantity);
+                                                    float temp2;
+                                                    if(type=="buy"){
+                                                        temp2=curbuffalo-temp;
+                                                    }else{
+                                                        temp2=curbuffalo+temp;
+                                                    }
+                                                    if (maxbuffalo > (temp2)) {
+                                                        curbuffalo =temp2;
+                                                        Map<String, Object> tempdata = new HashMap<>();
+                                                        tempdata.put("curbuffalo", String.valueOf(curbuffalo));
+
+                                                        documentReference.update(tempdata)
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
+                                                                        toast.setMargin(50, 50);
+                                                                        toast.show();
+                                                                       deleteDoc(db,document2,row,tableLayout);
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
+                                                                        toast.setMargin(50, 50);
+                                                                        toast.show();
+                                                                    }
+                                                                });
+                                                    } else {
+
+//                                                  throw new ArithmeticException("error");
+                                                    }
+                                                }
+
+                                            } else {
+                                                Toast toast = Toast.makeText(getTransactions.this, "no such document", Toast.LENGTH_SHORT);
+                                                toast.setMargin(50, 50);
+                                                toast.show();
+                                            }
+                                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                            Toast toast = Toast.makeText(getTransactions.this, "errorrrr", Toast.LENGTH_SHORT);
+                                            toast.setMargin(50, 50);
+                                            toast.show();
+                                        }
+
                                     }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT);
-                                        toast.setMargin(50, 50);
-                                        toast.show();
-                                    }
+
+
                                 });
+
+                        //////
+
 
 
 
@@ -265,5 +360,28 @@ public class getTransactions extends AppCompatActivity {
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
 
+    }
+
+    void deleteDoc(FirebaseFirestore db,QueryDocumentSnapshot document,TableRow row,
+                   TableLayout tableLayout){
+        db.collection("transaction").document(document.getId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
+                        toast.setMargin(50, 50);
+                        toast.show();
+                        tableLayout.removeView(row);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT);
+                        toast.setMargin(50, 50);
+                        toast.show();
+                    }
+                });
     }
 }

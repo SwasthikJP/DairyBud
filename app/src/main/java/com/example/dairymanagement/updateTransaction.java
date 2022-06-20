@@ -40,7 +40,7 @@ public class updateTransaction extends AppCompatActivity {
     TextInputEditText dateField, quantityField, rateField, amountField,typeField,idField;
     private int cDate,cMonth,cYear;
     Spinner spinner;
-
+String initialQuantity="0";
     Button submitBut;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -109,37 +109,132 @@ public class updateTransaction extends AppCompatActivity {
                         quantityField.getText().toString(),spinner.getSelectedItem().toString(),
                         rateField.getText().toString(),amountField.getText().toString()))
                 {
+
+
+                    //////
+
+
                     FirebaseFirestore db=FirebaseFirestore.getInstance();
 
-                    Map<String, Object> data = new HashMap<>();
-//                    data.put("userID",idField.getText().toString());
-//                    data.put("type",typeField.getText().toString());
-                    data.put("milktype",spinner.getSelectedItem().toString());
-                    data.put("quantity",quantityField.getText().toString());
-                    data.put("rate",rateField.getText().toString());
-//                    data.put("created", dateField.getText().toString());
-                    data.put("amount",amountField.getText().toString());
+                    /////
 
 
-                    db.collection("transaction")
-                            .document(docID).update(data)
+                    DocumentReference documentReference = db.collection("users").document("a2NvkEuPdMi7K0g6uPcI");
 
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    documentReference.get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast toast = Toast.makeText(getApplicationContext(), idField.getText().toString().toUpperCase() + " is updated", Toast.LENGTH_SHORT);
-                                    toast.setMargin(50, 50);
-                                    toast.show();
+
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+
+                                            if (spinner.getSelectedItem().toString().equals("Cow")) {
+                                                float maxcow = Float.parseFloat(document.getData().get("maxcow").toString());
+                                                float curcow = Float.parseFloat(document.getData().get("curcow").toString());
+                                                float temp = Float.parseFloat(quantityField.getText().toString());
+                                                float initialq=Float.parseFloat(initialQuantity);
+                                                float gg;
+                                                if(typeField.getText().toString().equals("buy")){
+                                                    gg=curcow-initialq+temp;
+                                                }else{
+                                                    gg=curcow+initialq-temp;
+                                                }
+                                                if (maxcow > (gg) && gg>0) {
+                                                    curcow = gg;
+                                                    initialq=curcow;
+                                                    Map<String, Object> tempdata = new HashMap<>();
+                                                    tempdata.put("curcow", String.valueOf(curcow));
+
+                                                    documentReference.update(tempdata)
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
+                                                                    toast.setMargin(50, 50);
+                                                                    toast.show();
+                                                                    updateData(docID);
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
+                                                                    toast.setMargin(50, 50);
+                                                                    toast.show();
+                                                                }
+                                                            });
+                                                } else {
+                                                    quantityField.requestFocus();
+                                                    quantityField.setError("Value has to be less than " + (maxcow - curcow));
+
+//                                                  throw new ArithmeticException("error");
+                                                }
+                                            } else {
+                                                float maxbuffalo = Float.parseFloat(document.getData().get("maxbuffalo").toString());
+                                                float curbuffalo = Float.parseFloat(document.getData().get("curbuffalo").toString());
+                                                float temp = Float.parseFloat(quantityField.getText().toString());
+                                                float initialq=Float.parseFloat(initialQuantity);
+                                                float gg;
+                                                if(typeField.getText().toString().equals("buy")){
+                                                    gg=curbuffalo-initialq+temp;
+                                                }else{
+                                                    gg=curbuffalo+initialq-temp;
+                                                }
+                                                if (maxbuffalo > (gg) && gg>0) {
+                                                    curbuffalo = gg;
+                                                    initialq=curbuffalo;
+                                                    Map<String, Object> tempdata = new HashMap<>();
+                                                    tempdata.put("curbuffalo", String.valueOf(curbuffalo));
+
+                                                    documentReference.update(tempdata)
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
+                                                                    toast.setMargin(50, 50);
+                                                                    toast.show();
+                                                                    updateData(docID);
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
+                                                                    toast.setMargin(50, 50);
+                                                                    toast.show();
+                                                                }
+                                                            });
+                                                } else {
+                                                    quantityField.requestFocus();
+                                                    quantityField.setError("Value has to be less than " + (maxbuffalo - curbuffalo));
+//                                                  throw new ArithmeticException("error");
+                                                }
+                                            }
+
+                                        } else {
+                                            Toast toast = Toast.makeText(updateTransaction.this, "no such document", Toast.LENGTH_SHORT);
+                                            toast.setMargin(50, 50);
+                                            toast.show();
+                                        }
+                                    } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                        Toast toast = Toast.makeText(updateTransaction.this, "errorrrr", Toast.LENGTH_SHORT);
+                                        toast.setMargin(50, 50);
+                                        toast.show();
+                                    }
+
                                 }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
-                                    toast.setMargin(50, 50);
-                                    toast.show();
-                                }
+
+
                             });
+
+
+
+
                 }
             }
         });
@@ -212,6 +307,42 @@ public class updateTransaction extends AppCompatActivity {
     }
 
 
+    void updateData(String docID){
+        ////////
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+
+        Map<String, Object> data = new HashMap<>();
+//                    data.put("userID",idField.getText().toString());
+//                    data.put("type",typeField.getText().toString());
+        data.put("milktype",spinner.getSelectedItem().toString());
+        data.put("quantity",quantityField.getText().toString());
+        data.put("rate",rateField.getText().toString());
+//                    data.put("created", dateField.getText().toString());
+        data.put("amount",amountField.getText().toString());
+
+
+        db.collection("transaction")
+                .document(docID).update(data)
+
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast toast = Toast.makeText(getApplicationContext(), idField.getText().toString().toUpperCase() + " is updated", Toast.LENGTH_SHORT);
+                        toast.setMargin(50, 50);
+                        toast.show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
+                        toast.setMargin(50, 50);
+                        toast.show();
+                    }
+                });
+    }
+
+
     public  void getData(String docID){
         FirebaseFirestore db=FirebaseFirestore.getInstance();
 
@@ -242,7 +373,7 @@ public class updateTransaction extends AppCompatActivity {
                                 spinner.setSelection(document.getData().get("milktype").toString().equals("Cow")?0:1);
                                 quantityField.setText(document.getData().get("quantity").toString());
                                 rateField.setText(document.getData().get("rate").toString());
-
+                                initialQuantity= quantityField.getText().toString();
 
 
                             } else {
