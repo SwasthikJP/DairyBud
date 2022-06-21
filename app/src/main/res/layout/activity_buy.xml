@@ -6,7 +6,7 @@
     android:id="@+id/my_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".updateDepot"
+    tools:context=".buy"
     tools:ignore="HardcodedText">
 
 
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="#FAFAFF"
         android:fitsSystemWindows="true"
-        tools:context=".updateDepot">
+        tools:context=".buy">
 
         <ScrollView
             android:id="@+id/scrollView2"
@@ -39,50 +39,24 @@
                 android:orientation="vertical">
 
 
-
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Name"
-                    android:textColor="#000000"
-                    android:textFontWeight="700"
-                    android:textStyle="bold" />
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="#777AF3"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
-
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Address"
+                    android:text="Date"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addressField"
+                    android:id="@+id/dateField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
-                    android:inputType="textMultiLine"
+                    android:hint=""
                     android:minWidth="48dp"
                     android:minHeight="48dp"
                     android:padding="5dp"
@@ -96,17 +70,54 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Max Cow milk capacity"
+                    android:text="Producer ID"
+                    android:textColor="#000000"
+                    android:textFontWeight="700"
+                    android:textStyle="bold" />
+
+
+                <!--            <com.google.android.material.textfield.TextInputEditText-->
+                <!--                android:id="@+id/nameField"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginBottom="20dp"-->
+                <!--                android:background="#777AF3"-->
+                <!--                android:hint="P100"-->
+                <!--                android:minWidth="48dp"-->
+                <!--                android:minHeight="48dp"-->
+                <!--                android:padding="5dp"-->
+                <!--                android:textColor="#FFFFFF"-->
+                <!--                android:textColorHighlight="#FFFFFF"-->
+                <!--                android:textColorHint="#FFFFFF"-->
+                <!--                android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>-->
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:contentDescription="milk type"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"></Spinner>
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Quantity"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/maxcowField"
+                    android:id="@+id/quantityField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
+                    android:hint="0"
                     android:inputType="numberDecimal"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
@@ -116,22 +127,46 @@
                     android:textColorHint="#FFFFFF"
                     android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
 
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Max Buffalo milk capacity"
+                    android:text="Milk Type"
+                    android:textColor="#000000"
+                    android:textFontWeight="700"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:contentDescription="milk type"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"></Spinner>
+
+
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Rate"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/maxbuffaloField"
+                    android:id="@+id/rateField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
+                    android:hint="0"
                     android:inputType="numberDecimal"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
@@ -141,22 +176,24 @@
                     android:textColorHint="#FFFFFF"
                     android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
 
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Current Cow milk capacity"
+                    android:text="Amount"
                     android:textColor="#000000"
                     android:textFontWeight="700"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/curcowField"
+                    android:id="@+id/contactField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="#777AF3"
+                    android:hint="0"
                     android:inputType="numberDecimal"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
@@ -166,55 +203,6 @@
                     android:textColorHint="#FFFFFF"
                     android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Current Buffalo milk capacity"
-                    android:textColor="#000000"
-                    android:textFontWeight="700"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/curbuffaloField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="#777AF3"
-                    android:inputType="numberDecimal"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Email"
-                    android:textColor="#000000"
-                    android:textFontWeight="700"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="#777AF3"
-                    android:inputType="text"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="5dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:textStyle="bold"></com.google.android.material.textfield.TextInputEditText>
 
             </LinearLayout>
         </ScrollView>
@@ -235,7 +223,7 @@
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Save changes"
+                android:text="Buy"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 tools:ignore="TouchTargetSizeCheck"></Button>

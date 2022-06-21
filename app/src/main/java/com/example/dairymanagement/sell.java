@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -37,7 +39,7 @@ public class sell extends AppCompatActivity {
     Button submitBut;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
+String uid;
     MenuItem sell;
 
     @Override
@@ -54,7 +56,9 @@ public class sell extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
+        FirebaseAuth mAuth=FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+        uid=firebaseUser.getUid();
 
 
 
@@ -131,7 +135,7 @@ public class sell extends AppCompatActivity {
 
                    FirebaseFirestore db=FirebaseFirestore.getInstance();
 
-                   DocumentReference documentReference = db.collection("users").document("a2NvkEuPdMi7K0g6uPcI");
+                   DocumentReference documentReference = db.collection("users").document(uid);
 
                    documentReference.get()
                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -312,6 +316,7 @@ public class sell extends AppCompatActivity {
         data.put("rate",rateField.getText().toString());
         data.put("created", FieldValue.serverTimestamp());
         data.put("amount",amountField.getText().toString());
+        data.put("uid",uid);
 
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         db.collection("transaction")

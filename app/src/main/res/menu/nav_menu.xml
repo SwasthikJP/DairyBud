@@ -13,27 +13,31 @@
 
     <item
         android:id="@+id/Producer"
-        android:title="Add producer" />
+        android:title="Add Producer" />
 
     <item
         android:id="@+id/Consumer"
-        android:title="Add consumer" />
+        android:title="Add Consumer" />
 
     <item
         android:id="@+id/allproducer"
-        android:title="All producers" />
+        android:title="All Producers" />
 
     <item
         android:id="@+id/allconsumer"
-        android:title="All consumers" />
+        android:title="All Consumers" />
 
     <item
         android:id="@+id/alltransaction"
-        android:title="All transactions" />
+        android:title="All Transactions" />
 
     <item
         android:id="@+id/updatedepot"
         android:title="Depot Information" />
+
+    <item
+        android:id="@+id/signout"
+        android:title="Signout" />
 
 
 

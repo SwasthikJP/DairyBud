@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,13 +33,17 @@ public class updateDepot extends AppCompatActivity {
     Button submitBut;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
+String uid;
     MenuItem sell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_depot);
+
+        FirebaseAuth mAuth=FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+        uid=firebaseUser.getUid();
 
         NavigationView navView = findViewById(R.id.nav_view);
 
@@ -93,7 +99,7 @@ public class updateDepot extends AppCompatActivity {
       data.put("curbuffalo", curbuffaloField.getText().toString());
 
       db.collection("users")
-                            .document("a2NvkEuPdMi7K0g6uPcI").update(data)
+                            .document(uid).update(data)
 
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -128,7 +134,7 @@ public class updateDepot extends AppCompatActivity {
     public  void getData(String docID){
         FirebaseFirestore db=FirebaseFirestore.getInstance();
 
-        db.collection("users").document("a2NvkEuPdMi7K0g6uPcI")
+        db.collection("users").document(uid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override

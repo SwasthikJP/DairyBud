@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AppDrawer {
 
@@ -26,7 +27,7 @@ public class AppDrawer {
                         toast=Toast.makeText(context,"buy",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
-                         intent = new Intent(context, MainActivity.class);
+                         intent = new Intent(context, buy.class);
                         context.startActivity(intent);
                         break;
 
@@ -85,6 +86,17 @@ public class AppDrawer {
                         intent = new Intent(context, updateDepot.class);
                         context.startActivity(intent);
                         break;
+
+                    case R.id.signout:
+
+                        FirebaseAuth.getInstance().signOut();
+                        toast=Toast.makeText(context,"signout successful",Toast.LENGTH_SHORT);
+                        toast.setMargin(50,50);
+                        toast.show();
+                        intent = new Intent(context, login.class);
+                        context.startActivity(intent);
+                        break;
+
 
                 }
                 return true;
