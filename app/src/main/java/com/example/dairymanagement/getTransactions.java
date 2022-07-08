@@ -158,12 +158,27 @@ String uid;
                                 amount.setText(document.getData().get("amount").toString());
                                 row.addView(amount);
 
+                                Button download=new Button(getTransactions.this);
+
                                 Button update=new Button(getTransactions.this);
 
                                 Button delete=new Button(getTransactions.this);
 
+                                download.setText("Download receipt");
                                 update.setText("Update");
                                 delete.setText("Delete");
+
+                                download.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+
+                                        Intent intent = new Intent(getTransactions.this, tempbutton.class);
+                                        intent.putExtra("docID",document.getId());
+
+                                        getTransactions.this.startActivity(intent);
+                                    }
+                                });
 
                                 update.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -181,6 +196,7 @@ String uid;
 
                                 delete.setOnClickListener(fun(db,document,row,tableLayout,milkType.getText().toString(),quantity.getText().toString(),type.getText().toString()));
 
+                                row.addView(download);
                                 row.addView(update);
                                 row.addView(delete);
 

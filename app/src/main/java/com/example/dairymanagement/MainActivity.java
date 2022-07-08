@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         logo.setAnimation(bottomAnim);
         slogan.setAnimation(bottomAnim);
 
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -56,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
                 if(currentUser != null){
 
                     Intent intent = new Intent(MainActivity.this,buy.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
 
                 }else {
                     Intent intent = new Intent(MainActivity.this, login.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 }

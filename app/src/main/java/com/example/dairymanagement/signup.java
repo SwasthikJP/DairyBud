@@ -219,7 +219,7 @@ public class signup extends AppCompatActivity {
 //                                                Toast.makeText(signup.this, "data added",
 //                                                        Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(signup.this, MainActivity.class);
-
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 signup.this.startActivity(intent);
                                             }
                                         })

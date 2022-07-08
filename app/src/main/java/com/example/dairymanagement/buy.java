@@ -79,9 +79,9 @@ public class buy extends AppCompatActivity {
 
         pidField=findViewById(R.id.spinner2);
         sD.spinnerListenerFirebase(pidField,buy.this,"producer");
-        Toast toast= Toast.makeText(getApplicationContext(),pidField.getSelectedItem().toString(),Toast.LENGTH_SHORT);
-        toast.setMargin(50,50);
-        toast.show();
+//        Toast toast= Toast.makeText(getApplicationContext(),pidField.getSelectedItem().toString(),Toast.LENGTH_SHORT);
+//        toast.setMargin(50,50);
+//        toast.show();
 
 
 
@@ -132,9 +132,9 @@ public class buy extends AppCompatActivity {
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
-                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
-                                                                    toast.setMargin(50, 50);
-                                                                    toast.show();
+//                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
+//                                                                    toast.setMargin(50, 50);
+//                                                                    toast.show();
                                                                     createData();
                                                                 }
                                                             })
@@ -165,9 +165,9 @@ public class buy extends AppCompatActivity {
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
-                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
-                                                                    toast.setMargin(50, 50);
-                                                                    toast.show();
+//                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
+//                                                                    toast.setMargin(50, 50);
+//                                                                    toast.show();
                                                                     createData();
                                                                 }
                                                             })
@@ -193,7 +193,7 @@ public class buy extends AppCompatActivity {
                                         }
                                     } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
-                                        Toast toast = Toast.makeText(buy.this, "errorrrr", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(buy.this, "error", Toast.LENGTH_SHORT);
                                         toast.setMargin(50, 50);
                                         toast.show();
                                     }

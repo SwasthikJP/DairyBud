@@ -57,14 +57,14 @@ public class spinnerDropdown  {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast toast= Toast.makeText(context.getApplicationContext(),document.getData().get(collection.equals("producer")?"pid":"cid").toString(),Toast.LENGTH_SHORT);
-                                toast.setMargin(50,50);
-                                toast.show();
+//                                Toast toast= Toast.makeText(context.getApplicationContext(),document.getData().get(collection.equals("producer")?"pid":"cid").toString(),Toast.LENGTH_SHORT);
+//                                toast.setMargin(50,50);
+//                                toast.show();
                                 categories.add(document.getData().get(collection.equals("producer")?"pid":"cid").toString());
                             }
                         } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
-                            Toast toast= Toast.makeText(context.getApplicationContext(),"errorrrr",Toast.LENGTH_SHORT);
+                            Toast toast= Toast.makeText(context.getApplicationContext(),"error",Toast.LENGTH_SHORT);
                             toast.setMargin(50,50);
                             toast.show();
                         }
@@ -79,9 +79,9 @@ public class spinnerDropdown  {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        Toast toast= Toast.makeText(context.getApplicationContext(),"donedone",Toast.LENGTH_SHORT);
-        toast.setMargin(50,50);
-        toast.show();
+//        Toast toast= Toast.makeText(context.getApplicationContext(),"donedone",Toast.LENGTH_SHORT);
+//        toast.setMargin(50,50);
+//        toast.show();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

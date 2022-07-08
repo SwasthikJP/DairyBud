@@ -24,7 +24,7 @@ public class AppDrawer {
                 Intent intent;
                 switch (menuItem.getItemId()) {
                     case R.id.buy:
-                        toast=Toast.makeText(context,"buy",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"Buy",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                          intent = new Intent(context, buy.class);
@@ -32,7 +32,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.sell:
-                         toast=Toast.makeText(context,"sell",Toast.LENGTH_SHORT);
+                         toast=Toast.makeText(context,"Sell",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                         intent = new Intent(context, sell.class);
@@ -40,7 +40,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.Producer:
-                        toast=Toast.makeText(context,"prodc",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"Producer",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                          intent = new Intent(context,producer.class);
@@ -48,7 +48,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.Consumer:
-                         toast=Toast.makeText(context,"cons",Toast.LENGTH_SHORT);
+                         toast=Toast.makeText(context,"Consumer",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                          intent = new Intent(context, consumer.class);
@@ -56,7 +56,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.allproducer:
-                        toast=Toast.makeText(context,"allproducer",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"All Producers",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                         intent = new Intent(context, getproducers.class);
@@ -64,7 +64,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.allconsumer:
-                        toast=Toast.makeText(context,"allconsumer",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"All Consumers",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                         intent = new Intent(context, getconsumers.class);
@@ -72,7 +72,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.alltransaction:
-                        toast=Toast.makeText(context,"alltransaction",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"All Transactions",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                         intent = new Intent(context, getTransactions.class);
@@ -80,7 +80,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.updatedepot:
-                        toast=Toast.makeText(context,"updateDepot",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"Depot Information",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                         intent = new Intent(context, updateDepot.class);
@@ -90,13 +90,13 @@ public class AppDrawer {
                     case R.id.signout:
 
                         FirebaseAuth.getInstance().signOut();
-                        toast=Toast.makeText(context,"signout successful",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"Signout Successful",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                         intent = new Intent(context, login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intent);
                         break;
-
 
                 }
                 return true;
