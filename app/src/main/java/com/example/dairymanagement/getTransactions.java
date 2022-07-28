@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -76,6 +78,8 @@ String uid;
 
         db.collection("transaction")
                 .whereEqualTo("uid", uid)
+//                .orderBy("uid")
+                .orderBy("created", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -177,6 +181,7 @@ String uid;
                                         intent.putExtra("docID",document.getId());
 
                                         getTransactions.this.startActivity(intent);
+
                                     }
                                 });
 
@@ -191,6 +196,7 @@ String uid;
                                         intent.putExtra("docID",document.getId());
 
                                         getTransactions.this.startActivity(intent);
+                                        finish();
                                     }
                                 });
 
@@ -206,8 +212,8 @@ String uid;
 
                             }
                         } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-                            Toast toast= Toast.makeText(getTransactions.this,"errorrrr",Toast.LENGTH_SHORT);
+                            Log.d("g", task.getException().toString(), task.getException());
+                            Toast toast= Toast.makeText(getTransactions.this,"errorrrr"+task.getException().toString(),Toast.LENGTH_SHORT);
                             toast.setMargin(50,50);
                             toast.show();
                         }
@@ -255,7 +261,7 @@ String uid;
 ///////
 
 
-                        DocumentReference documentReference = db.collection("users").document("a2NvkEuPdMi7K0g6uPcI");
+                        DocumentReference documentReference = db.collection("users").document(uid);
 
                         documentReference.get()
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -287,9 +293,9 @@ String uid;
                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {
-                                                                        Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
-                                                                        toast.setMargin(50, 50);
-                                                                        toast.show();
+//                                                                        Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
+//                                                                        toast.setMargin(50, 50);
+//                                                                        toast.show();
                                                                         deleteDoc(db,document2, row,tableLayout);
                                                                     }
                                                                 })
@@ -325,9 +331,9 @@ String uid;
                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {
-                                                                        Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
-                                                                        toast.setMargin(50, 50);
-                                                                        toast.show();
+//                                                                        Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
+//                                                                        toast.setMargin(50, 50);
+//                                                                        toast.show();
                                                                        deleteDoc(db,document2,row,tableLayout);
                                                                     }
                                                                 })
@@ -346,13 +352,13 @@ String uid;
                                                 }
 
                                             } else {
-                                                Toast toast = Toast.makeText(getTransactions.this, "no such document", Toast.LENGTH_SHORT);
+                                                Toast toast = Toast.makeText(getTransactions.this, "Record does not exist", Toast.LENGTH_SHORT);
                                                 toast.setMargin(50, 50);
                                                 toast.show();
                                             }
                                         } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
-                                            Toast toast = Toast.makeText(getTransactions.this, "errorrrr", Toast.LENGTH_SHORT);
+                                            Toast toast = Toast.makeText(getTransactions.this, "error", Toast.LENGTH_SHORT);
                                             toast.setMargin(50, 50);
                                             toast.show();
                                         }
@@ -369,14 +375,14 @@ String uid;
 
 
 
-                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
 
                     }
                 });
         dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"cancel is clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Cancelled",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -392,7 +398,7 @@ String uid;
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT);
                         toast.setMargin(50, 50);
                         toast.show();
                         tableLayout.removeView(row);
@@ -401,7 +407,7 @@ String uid;
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT);
                         toast.setMargin(50, 50);
                         toast.show();
                     }

@@ -76,6 +76,7 @@ public class getproducers extends AppCompatActivity {
             FirebaseFirestore db=FirebaseFirestore.getInstance();
 
             db.collection("producer")
+                    .orderBy("pid")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -152,9 +153,11 @@ public class getproducers extends AppCompatActivity {
 
 
                                             Intent intent = new Intent(getproducers.this, updateProducer.class);
+//                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             intent.putExtra("docID",document.getId());
 
                                             getproducers.this.startActivity(intent);
+                                           finish();
                                         }
                                     });
 
@@ -222,7 +225,7 @@ public class getproducers extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT);
                                         toast.setMargin(50, 50);
                                         toast.show();
                                         tableLayout.removeView(row);
@@ -231,7 +234,7 @@ public class getproducers extends AppCompatActivity {
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT);
                                         toast.setMargin(50, 50);
                                         toast.show();
                                     }
@@ -241,14 +244,14 @@ public class getproducers extends AppCompatActivity {
 
 
 
-                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
 
                     }
                 });
         dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"cancel is clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Cancelled",Toast.LENGTH_LONG).show();
 
             }
         });

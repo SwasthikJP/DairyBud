@@ -40,7 +40,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.Producer:
-                        toast=Toast.makeText(context,"Producer",Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(context,"Add Producer",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                          intent = new Intent(context,producer.class);
@@ -48,7 +48,7 @@ public class AppDrawer {
                         break;
 
                     case R.id.Consumer:
-                         toast=Toast.makeText(context,"Consumer",Toast.LENGTH_SHORT);
+                         toast=Toast.makeText(context,"Add Consumer",Toast.LENGTH_SHORT);
                         toast.setMargin(50,50);
                         toast.show();
                          intent = new Intent(context, consumer.class);

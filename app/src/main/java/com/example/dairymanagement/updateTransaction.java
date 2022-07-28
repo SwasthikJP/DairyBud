@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -75,6 +77,7 @@ String initialQuantity="0";
         spinner=findViewById(R.id.spinner);
         spinnerDropdown sD=new spinnerDropdown();
         sD.spinnerListener(spinner,this);
+        spinner.setEnabled(false);
 
         idField=findViewById(R.id.spinner2);
 //        sD.spinnerListenerFirebase(idField,sell.this,"consumer");
@@ -119,7 +122,10 @@ String initialQuantity="0";
                     /////
 
 
-                    DocumentReference documentReference = db.collection("users").document("a2NvkEuPdMi7K0g6uPcI");
+                    FirebaseAuth mAuth=FirebaseAuth.getInstance();
+                    FirebaseUser firebaseUser=mAuth.getCurrentUser();
+               String   uid=firebaseUser.getUid();
+                    DocumentReference documentReference = db.collection("users").document(uid);
 
                     documentReference.get()
                             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -153,9 +159,9 @@ String initialQuantity="0";
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
-                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
-                                                                    toast.setMargin(50, 50);
-                                                                    toast.show();
+//                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curcow updated", Toast.LENGTH_SHORT);
+//                                                                    toast.setMargin(50, 50);
+//                                                                    toast.show();
                                                                     updateData(docID);
                                                                 }
                                                             })
@@ -184,7 +190,16 @@ String initialQuantity="0";
                                                 }else{
                                                     gg=curbuffalo+initialq-temp;
                                                 }
-                                                if (maxbuffalo > (gg) && gg>0) {
+//                                                Toast toast = Toast.makeText(getApplicationContext(), ""+curbuffalo, Toast.LENGTH_SHORT);
+//                                                toast.setMargin(50, 50);
+//                                                toast.show();
+//                                               Toast.makeText(getApplicationContext(), ""+initialq, Toast.LENGTH_SHORT);
+//                                                toast.setMargin(50, 50);
+//                                                toast.show();
+//                                                Toast.makeText(getApplicationContext(), ""+gg, Toast.LENGTH_SHORT);
+//                                                toast.setMargin(50, 50);
+//                                                toast.show();
+                                                if ((maxbuffalo > gg) && (gg>0)) {
                                                     curbuffalo = gg;
                                                     initialq=curbuffalo;
                                                     Map<String, Object> tempdata = new HashMap<>();
@@ -194,9 +209,9 @@ String initialQuantity="0";
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
-                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
-                                                                    toast.setMargin(50, 50);
-                                                                    toast.show();
+//                                                                    Toast toast = Toast.makeText(getApplicationContext(), "curbuffalo updated", Toast.LENGTH_SHORT);
+//                                                                    toast.setMargin(50, 50);
+//                                                                    toast.show();
                                                                     updateData(docID);
                                                                 }
                                                             })
@@ -216,13 +231,13 @@ String initialQuantity="0";
                                             }
 
                                         } else {
-                                            Toast toast = Toast.makeText(updateTransaction.this, "no such document", Toast.LENGTH_SHORT);
+                                            Toast toast = Toast.makeText(updateTransaction.this, "Record does not exist", Toast.LENGTH_SHORT);
                                             toast.setMargin(50, 50);
                                             toast.show();
                                         }
                                     } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
-                                        Toast toast = Toast.makeText(updateTransaction.this, "errorrrr", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(updateTransaction.this, "Error Occured", Toast.LENGTH_SHORT);
                                         toast.setMargin(50, 50);
                                         toast.show();
                                     }
@@ -327,7 +342,7 @@ String initialQuantity="0";
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast toast = Toast.makeText(getApplicationContext(), idField.getText().toString().toUpperCase() + " is updated", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Updated Successfully", Toast.LENGTH_SHORT);
                         toast.setMargin(50, 50);
                         toast.show();
                     }
@@ -377,13 +392,13 @@ String initialQuantity="0";
 
 
                             } else {
-                                Toast toast= Toast.makeText(updateTransaction.this,"no such document",Toast.LENGTH_SHORT);
+                                Toast toast= Toast.makeText(updateTransaction.this,"Record does not exist",Toast.LENGTH_SHORT);
                                 toast.setMargin(50,50);
                                 toast.show();
                             }
                         } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
-                            Toast toast= Toast.makeText(updateTransaction.this,"errorrrr",Toast.LENGTH_SHORT);
+                            Toast toast= Toast.makeText(updateTransaction.this,"Error Occured",Toast.LENGTH_SHORT);
                             toast.setMargin(50,50);
                             toast.show();
                         }

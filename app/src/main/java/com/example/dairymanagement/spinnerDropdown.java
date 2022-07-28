@@ -51,6 +51,7 @@ public class spinnerDropdown  {
         FirebaseFirestore db=FirebaseFirestore.getInstance();
 
         db.collection(collection)
+                .orderBy(collection.equals("producer")?"pid":"cid")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

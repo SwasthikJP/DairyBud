@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,9 +65,16 @@ String uid;
 
 
         dateField=findViewById(R.id.dateField);
-        datePicker dp=new datePicker();
+//        datePicker dp=new datePicker();
+//
+//        dp.dateonClick(dateField,this);
 
-        dp.dateonClick(dateField,this);
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date todayDate = new Date();
+        String thisDate = currentDate.format(todayDate);
+        dateField.setText(thisDate);
+        dateField.setFocusable(false);
+        dateField.setEnabled(false);
 
 
 
@@ -77,9 +86,9 @@ String uid;
 
         cidField=findViewById(R.id.spinner2);
         sD.spinnerListenerFirebase(cidField,sell.this,"consumer");
-        Toast toast= Toast.makeText(getApplicationContext(),cidField.getSelectedItem().toString(),Toast.LENGTH_SHORT);
-        toast.setMargin(50,50);
-        toast.show();
+//        Toast toast= Toast.makeText(getApplicationContext(),cidField.getSelectedItem().toString(),Toast.LENGTH_SHORT);
+//        toast.setMargin(50,50);
+//        toast.show();
 
 
 

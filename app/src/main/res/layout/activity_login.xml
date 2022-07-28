@@ -79,7 +79,7 @@
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:elevation="0dp"
-            android:text="Forget Password?"
+            android:text=""
             android:textColor="@color/black" />
 
         <Button

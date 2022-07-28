@@ -67,6 +67,7 @@ public class getconsumers extends AppCompatActivity {
         FirebaseFirestore db=FirebaseFirestore.getInstance();
 
         db.collection("consumer")
+                .orderBy("cid")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -145,6 +146,7 @@ public class getconsumers extends AppCompatActivity {
                                         intent.putExtra("docID",document.getId());
 
                                         getconsumers.this.startActivity(intent);
+                                        finish();
                                     }
                                 });
 
@@ -212,7 +214,7 @@ public class getconsumers extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT);
                                         toast.setMargin(50, 50);
                                         toast.show();
                                         tableLayout.removeView(row);
@@ -221,7 +223,7 @@ public class getconsumers extends AppCompatActivity {
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(getApplicationContext(), "Error occured", Toast.LENGTH_SHORT);
                                         toast.setMargin(50, 50);
                                         toast.show();
                                     }
@@ -231,14 +233,14 @@ public class getconsumers extends AppCompatActivity {
 
 
 
-                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
 
                     }
                 });
         dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"cancel is clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Cancelled",Toast.LENGTH_LONG).show();
 
             }
         });
